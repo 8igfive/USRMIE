@@ -17,41 +17,41 @@ This is a PyTorch implementation of the paper *Unsupervised Semantic Retrieval v
 ## Preprocess
 
 1. Arrange datasets in json files as following form:
-  ```json
-  [
-    {
-      "id": "<id for sample>", 
-      "query": "<query text>",
-      "candidates": [
-        {
-            "cid": "<id for candidate>",
-            "order": "<rank sequence>",
-            "label": "<0 or 1>",
-            "subject": "<Subject of the candidate or empty>",
-            "body": "<Body of the candidate>"
-        }, ...
-      ]
-    }, ...
-  ]
-  ```
+    ```json
+    [
+      {
+        "id": "<id for sample>", 
+        "query": "<query text>",
+        "candidates": [
+          {
+              "cid": "<id for candidate>",
+              "order": "<rank sequence>",
+              "label": "<0 or 1>",
+              "subject": "<Subject of the candidate or empty>",
+              "body": "<Body of the candidate>"
+          }, ...
+        ]
+      }, ...
+    ]
+    ```
 2. Place datasets in the `data` folder as described in `preprocess.py/CORPUS2PATH`
 3. formalize the datasets by:
-  ```shell
-  python preprocess.py -fc <corpus name> -dd <dump path> -dc -dqac
-  ```
+    ```shell
+    python preprocess.py -fc <corpus name> -dd   <dump path> -dc -dqac
+    ```
 4. Calculate the results of source domain function by:
-  ```shell
-  python preprocess.py -cm <source domain function type> -c <corpus name> -mp <model path>
-  ```
+    ```shell
+    python preprocess.py -cm <source domain   function type> -c <corpus name> -mp <model   path>
+    ```
 5. Calculate the metrics for the results of source domain function by:
-  ```shell
-  python preprocess.py -cmx <MAP, MRR or F1> -pp <path of results> -cr <cal range> 
-  ```
+    ```shell
+    python preprocess.py -cmx <MAP, MRR or F1> -pp   <path of results> -cr <cal range> 
+    ```
 
 ## Training
 
 1. Prepare a configuration file like the sample in `conf/wikiqa/wikiqa.yaml`
 2. Train our model by:
-  ```shell
-  python USRMIE.py -t <qa or wsd> -cp <path to configuration file> -dtr -dte -g <gpus to use> -r <local rank> -wf <path to save tensorboard information> -s <seed>
-  ```
+    ```shell
+    python USRMIE.py -t <qa or wsd> -cp <path to   configuration file> -dtr -dte -g <gpus to use>   -r <local rank> -wf <path to save tensorboard   information> -s <seed>
+    ```
