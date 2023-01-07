@@ -1,0 +1,39 @@
+data:
+  dataset: wikiqa
+  mini_batch: 2
+  cand_use_method: normal
+  neg_method: mix
+  pos_cand_num: 2
+  k: 15
+  neg_cand_num: 4 
+  pos_main_num: 5
+  pos_main_prob: 0.75
+  neg_main_prob: 0.75
+  modify_pred: nop                  # method to modify pred: nop, exp
+  data_type: train
+  pred_path: dump/preprocess/WikiQA/priors/SBert.json # <path to the results of source domain function>
+  test_path: data/wikiqa/wikiqa.test.json
+  dev_path: data/wikiqa/wikiqa.dev.json
+  train_path: data/wikiqa/wikiqa.train.json
+  max_length: 256
+model:
+  model_type: base_model
+  dim_embed: 300
+  hidden_dim: 300
+  bert_path: /home/LAB/limx/download/model/bert-base-uncased # <path to a local bert folder>
+  layers: 6                         # layers of unfreezed transformer encoders.
+  alpha: 0.00
+train:
+  name: wikiqa_1
+  optimizer:
+    type: adam
+    lr: 1.0e-6
+    weight_decay: 0
+  epoch: 100
+  loss:
+    type: infonce
+    temperature: 2.0
+  metric: MAP
+  preds_update_base: 'priors'
+  preds_update_score_power: 0.1
+  preds_update_base_power: 1.0
